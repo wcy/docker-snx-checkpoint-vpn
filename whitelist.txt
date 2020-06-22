@@ -1,0 +1,14 @@
+prod-salt1.symphony.com
+gce-prod-salt1.symphony.com
+uat-salt1.symphony.com
+gce-uat-salt1.symphony.com
+stage-salt1.symphony.com
+gce-stage-salt1.symphony.com
+qa-salt1.symphony.com
+gce-qa-salt1.symphony.com
+dev-salt1.symphony.com
+gce-dev-salt1.symphony.com
+dashboard.prod.symphony.com
+dashboard.uat.symphony.com
+dashboard.qa.symphony.com
+dashboard.dev.symphony.com

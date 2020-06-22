@@ -20,29 +20,27 @@
 #
 #    info@kedu.coop
 
-server=$SNX_SERVER
-user=$SNX_USER
-password=$SNX_PASSWORD
-snx_command=""
-certificate_path="/certificate.p12"
+#server=$SNX_SERVER
+#user=$SNX_USER
+#password=$SNX_PASSWORD
+SNX_COMMAND=""
+CERT_PATH="/certificate.p12"
 
-if [ -f "$certificate_path" ]; then
-    if [ ! -z "$user" ]; then
-        snx_command="snx -s $server -u $user -c $certificate_path"
-    else
-        snx_command="snx -s $server -c $certificate_path"
-    fi
-else
-    snx_command="snx -s $server -u $user"
+SNX_COMMAND="snx -s $SNX_SERVER"
+if [ ! -z "$SNX_USERNAME" ]; then
+  SNX_COMMAND="$SNX_COMMAND -u $SNX_USERNAME"
+fi
+if [ -f "$CERT_PATH" ]; then
+  SNX_COMMAND="$SNX_COMMAND -c $CERT_PATH"
 fi
 
 iptables -t nat -A POSTROUTING -o tunsnx -j MASQUERADE
 iptables -A FORWARD -i eth0 -j ACCEPT
 
 /usr/bin/expect <<EOF
-spawn $snx_command
+spawn $SNX_COMMAND
 expect "*?assword:"
-send "$password\r"
+send "$SNX_PASSWORD\r"
 expect "*Do you accept*"
 send "y\r"
 expect "SNX - connected."
